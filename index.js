@@ -78,16 +78,14 @@ async function showForecast() {
       continue;
     }
 
-
-   while (article.dt_txt.substring(0, 10) === dayString) {
+    while (article.dt_txt.substring(0, 10) === dayString) {
       console.log(article.main.temp);
       break;
     }
 
-
     str += `
     <div class="weatherForcastItem">
-      <div class="day">Tue</div>
+
       <div>${article.dt_txt.substring(10, 16)}</div>
       <div>
         <img src="http://openweathermap.org/img/w/${
