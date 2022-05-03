@@ -70,21 +70,39 @@ async function showForecast() {
 
   let forcastInfoText = document.querySelector(".weatherForcasts");
   let str = "";
-
   let dayString = weatherData.list[0].dt_txt.substring(0, 10);
 
-  for (let [i, article] of Object.entries(weatherData.list)) {
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const time = new Date();
+  let day = time.getDay();
+  day++;
+
+  for (let article of weatherData.list) {
     if (article === null) {
       continue;
     }
-
-    while (article.dt_txt.substring(0, 10) === dayString) {
-      console.log(article.main.temp);
-      break;
+    if (dayString !== article.dt_txt.substring(0, 10)) {
+      str += `<div class="weatherForcastDay">${days[day]}</div>`;
+      dayString = article.dt_txt.substring(0, 10);
+      day++;
     }
-
-    str += `
-    <div class="weatherForcastItem">
+    if (dayString === article.dt_txt.substring(0, 10)) {
+      str += `    <div class="weatherForcastItem">
 
       <div>${article.dt_txt.substring(10, 16)}</div>
       <div>
@@ -94,6 +112,7 @@ async function showForecast() {
       </div>
       <div class="forcastTemp">${article.main.temp} &#176;C</div>
     </div>`;
+    }
   }
   forcastInfoText.innerHTML = str;
 }
@@ -103,13 +122,13 @@ function getDateTime() {
   const dateEl = document.querySelector(".date");
 
   const days = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
   const months = [
     "Jan",
