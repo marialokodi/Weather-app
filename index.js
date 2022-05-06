@@ -115,6 +115,7 @@ async function showForecast() {
     }
   }
   forcastInfoText.innerHTML = str;
+  document.querySelector("[name='city']").value = "";
 }
 
 function getDateTime() {
@@ -150,8 +151,9 @@ function getDateTime() {
     const date = time.getDate();
     const day = time.getDay();
     const hour = time.getHours();
-    const hoursInAmPm = hour >= 13 ? hour % 12 : hour;
-    const minutes = time.getMinutes();
+    const hoursInAmPm = hour < 10 ? "0" + hour : hour;
+    const minutes =
+      time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes();
     let amPm = hour >= 12 ? "PM" : "AM";
 
     timeEl.innerHTML = `${hoursInAmPm}:${minutes} <span id="am-pm">${amPm}</span>`;
