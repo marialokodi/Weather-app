@@ -113,7 +113,7 @@ input[name="city"]:hover {
   width: 100%;
   justify-content: start;
   align-items: none;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .futureForcast .today {
